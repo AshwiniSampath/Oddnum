@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'Slave'
+        label 'SlaveNew'
     }
     
     stages {
@@ -22,6 +22,7 @@ pipeline {
                     }
                 }
                 stage('Test2') {
+                
                     steps {
                         sh '''
                             echo "Test Stage 2"
@@ -40,4 +41,3 @@ pipeline {
         }
     }
 }
-
