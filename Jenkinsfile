@@ -22,7 +22,6 @@ pipeline {
                     }
                 }
                 stage('Test2') {
-                
                     steps {
                         sh '''
                             echo "Test Stage 2"
@@ -34,9 +33,14 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sh '''
-                    echo "This is Deploy stage"
-                '''
+                script {
+                    def warFile = findFiles(glob: 'target/*.war').get(0)
+                    if (warFile != null) {
+                        sh "cp ${warFile} /home/ec2-user/boxfuse-sample-java-war-hello/targethello-1.0.war"
+                    } else {
+                        error "War file not found in target directory"
+                    }
+                }
             }
         }
     }
