@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                   /home/ec2-user/boxfuse-sample-java-war-hello/mvn clean install
+                    /home/ec2-user/boxfuse-sample-java-war-hello/mvn clean install
                     sleep 5
                 '''
             }
