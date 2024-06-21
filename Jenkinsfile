@@ -7,28 +7,37 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    /home/ec2-user/boxfuse-sample-java-war-hello/mvn clean install
-                    sleep 5
+                    mvn clean install
                 '''
             }
         }
         
-        stage('Test') {
-            steps {
-                sh '''
-                    echo "This is Test stage"
-                    sleep 5
-                '''
+        stage('Parallel Test') {
+            parallel {
+                stage('Test1') {
+                    steps {
+                        sh '''
+                            echo "Test Stage 1"
+                        '''
+                    }
+                }
+                stage('Test2') {
+                    steps {
+                        sh '''
+                            echo "Test Stage 2"
+                        '''
+                    }
+                }
             }
         }
         
         stage('Deploy') {
             steps {
                 sh '''
-                    echo "This is Deploy Stage"
-                    sleep 5
+                    echo "This is Deploy stage"
                 '''
             }
         }
     }
 }
+
