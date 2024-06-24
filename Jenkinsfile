@@ -32,7 +32,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    echo "This is Deploy stage"
+                    cp sudo cp /var/lib/jenkins/workspace/pipeline2/target/hello-1.0.war /usr/tomcat/tomcat10/webapps
+
                 '''
             }
         }
