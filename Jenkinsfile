@@ -1,11 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        label 'any'
+    }
     
     stages {
         stage('Build') {
             steps {
                 sh '''
-                    mvn clean install
+                    echo "This is Build stage"
                 '''
             }
         }
@@ -32,8 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    sudo cp /var/lib/jenkins/workspace/pipeline2/target/hello-1.0.war /usr/tomcat/tomcat10/webapps
-
+                    echo "This is Deploy stage"
                 '''
             }
         }
