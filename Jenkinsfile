@@ -1,12 +1,5 @@
-Parrel stage
-
-
-
-
 pipeline {
-    agent {
-        label 'Slave'
-    }
+    agent any
     
     stages {
         stage('Build') {
@@ -45,4 +38,3 @@ pipeline {
         }
     }
 }
-
