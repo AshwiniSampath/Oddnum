@@ -1,13 +1,11 @@
 pipeline {
-    agent {
-        label 'SlaveNew'
-    }
+    agent any
     
     stages {
         stage('Build') {
             steps {
                 sh '''
-                    mvn clean install
+                    echo "This is Build stage"
                 '''
             }
         }
@@ -33,14 +31,9 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                script {
-                    def warFile = findFiles(glob: 'target/*.war').get(0)
-                    if (warFile != null) {
-                        sh "cp ${warFile} /home/ec2-user/boxfuse-sample-java-war-hello/targethello-1.0.war"
-                    } else {
-                        error "War file not found in target directory"
-                    }
-                }
+                sh '''
+                    echo "This is Deploy stage"
+                '''
             }
         }
     }
