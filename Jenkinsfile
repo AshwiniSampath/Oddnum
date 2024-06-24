@@ -1,38 +1,48 @@
+Parrel stage
+
+
+
+
 pipeline {
-    agent any
+    agent {
+        label 'Slave'
+    }
     
     stages {
         stage('Build') {
             steps {
                 sh '''
-                    echo "This is a build step"
-                    sleep 5
+                    echo "This is Build stage"
                 '''
             }
         }
         
-        stage('Test') {
-            agent {
-                label 'Slave'
-            }
-            steps {
-                sh '''
-                    echo "This is Test stage"
-                    sleep 5
-                '''
+        stage('Parallel Test') {
+            parallel {
+                stage('Test1') {
+                    steps {
+                        sh '''
+                            echo "Test Stage 1"
+                        '''
+                    }
+                }
+                stage('Test2') {
+                    steps {
+                        sh '''
+                            echo "Test Stage 2"
+                        '''
+                    }
+                }
             }
         }
         
         stage('Deploy') {
-            agent {
-                label 'Slave'
-            }
             steps {
                 sh '''
-                    echo "This is Deploy Stage"
-                    sleep 5
+                    echo "This is Deploy stage"
                 '''
             }
         }
     }
 }
+
