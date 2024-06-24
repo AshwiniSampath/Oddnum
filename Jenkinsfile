@@ -12,6 +12,9 @@ pipeline {
         }
         
         stage('Test') {
+            agent {
+                label 'Slave'
+            }
             steps {
                 sh '''
                     echo "This is Test stage"
@@ -21,6 +24,9 @@ pipeline {
         }
         
         stage('Deploy') {
+            agent {
+                label 'Slave'
+            }
             steps {
                 sh '''
                     echo "This is Deploy Stage"
